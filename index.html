@@ -1,57 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Walk Work With Pan | 潘红英</title>
     <style>
         :root {
-            /* 提取自你的 Logo 背景色，实现无缝融合 */
-            --brand-bg: #E4D5C7;  
+            /* 调整为更贴近你 Logo 的柔和燕麦米色 */
+            --brand-bg: #E3D4C5;  
             --brand-brown: #6d4c41; 
             --brand-accent: #a1887f; 
-            --white: rgba(255, 255, 255, 0.6); /* 卡片半透明，透出底色更高级 */
+            --white: rgba(255, 255, 255, 0.6); 
         }
 
         body {
             font-family: 'PingFang SC', 'Hiragino Sans GB', 'Helvetica Neue', sans-serif;
             margin: 0;
-            background-color: var(--brand-bg); /* 全站底色与 Logo 统一 */
+            background-color: var(--brand-bg); 
             color: var(--brand-brown);
             line-height: 1.6;
             transition: background-color 0.3s;
         }
 
-        /* 顶部导航栏 */
+        /* 顶部导航栏 - 增加了上下内边距以容纳更大的 Logo */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%;
-            background: rgba(228, 213, 199, 0.85); /* 匹配底色的毛玻璃效果 */
+            padding: 1.5rem 5%; 
+            background: rgba(227, 212, 197, 0.85); 
             backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        /* Logo 占据三分之二的空间，并靠左对齐 */
         .logo-area {
             flex: 0 0 66.66%; 
             display: flex;
             align-items: center;
         }
 
+        /* 关键升级：Logo 尺寸放大 + 背景无缝融合 */
         .logo-area img {
             width: 100%;
-            max-width: 350px; /* 适当放宽最大尺寸，彰显大气 */
+            max-width: 480px; /* 最大宽度大幅提升（原来是350px） */
             height: auto;
-            max-height: 120px;
+            max-height: 200px; /* 最大高度提升（原来是120px） */
             object-fit: contain;
-            object-position: left; /* 确保 Logo 靠左上角显示 */
+            object-position: left;
+            mix-blend-mode: multiply; /* CSS 魔法：消除图片底色色差，完美融入网页 */
         }
 
-        /* 右侧操作区占据剩下的三分之一 */
         .nav-right {
             flex: 0 0 33.33%;
             display: flex;
@@ -60,7 +60,6 @@
             gap: 15px;
         }
 
-        /* Instagram 按钮样式 */
         .ig-link {
             display: flex;
             align-items: center;
@@ -103,7 +102,6 @@
             color: var(--brand-bg);
         }
 
-        /* Hero 区域 */
         .hero {
             padding: 60px 10%;
             display: flex;
@@ -117,7 +115,6 @@
         .hero-text h1 { font-size: 3.5rem; margin: 0; color: var(--brand-brown); }
         .hero-text h2 { font-weight: 300; font-size: 1.5rem; margin: 10px 0 20px; color: var(--brand-accent); }
 
-        /* 高级圆环头像设计 */
         .profile-wrapper {
             flex: 0 0 280px;
             height: 280px;
@@ -133,11 +130,10 @@
             border-radius: 50%; 
             object-fit: cover; 
             object-position: center; 
-            border: 5px solid var(--brand-bg); /* 内环与底色同色，更显融合 */
+            border: 5px solid var(--brand-bg); 
             box-sizing: border-box;
         }
 
-        /* 服务区域 */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -165,7 +161,6 @@
             margin-bottom: 15px;
         }
 
-        /* 底部 */
         footer {
             text-align: center;
             padding: 60px 20px;
@@ -173,20 +168,9 @@
             font-size: 0.9rem;
         }
 
-        .footer-social {
-            margin-bottom: 15px;
-        }
-
-        .footer-social a {
-            color: var(--brand-brown);
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        .footer-social a:hover {
-            color: #E1306C;
-        }
+        .footer-social { margin-bottom: 15px; }
+        .footer-social a { color: var(--brand-brown); text-decoration: none; font-weight: bold; transition: color 0.3s ease; }
+        .footer-social a:hover { color: #E1306C; }
 
         @media (max-width: 900px) {
             .hero { text-align: center; justify-content: center; }
@@ -205,7 +189,6 @@
 
 <nav>
     <div class="logo-area">
-        <!-- Logo 现已占据 2/3 宽度并靠左上角对齐 -->
         <img src="logo.png" alt="Walk Work With Pan Logo">
     </div>
     
@@ -234,9 +217,8 @@
         </p>
     </div>
     
-    <!-- 圆环头像结构 -->
     <div class="profile-wrapper">
-        <img src="avatar.jpg" alt="潘红英" class="profile-img">
+        <img src="微信图片_20240731133210 - 副本.jpg" alt="潘红英" class="profile-img">
     </div>
 </section>
 
@@ -248,7 +230,7 @@
     <div class="footer-social">
         Follow me on <a href="https://www.instagram.com/cleopaaatra___/" target="_blank">Instagram (@cleopaaatra___)</a>
     </div>
-    <p id="footer-info">Based in Shanghai, flexible to worldwide traveling </p>
+    <p id="footer-info">常驻地：上海 (可灵活差旅) | 技能：摄影、中西餐烹饪</p>
     <p>© 2026 Walk Work With Pan. All rights reserved.</p>
 </footer>
 
@@ -306,7 +288,6 @@ function setLang(lang) {
     `).join('');
 }
 
-// 初始化
 setLang('zh');
 </script>
 
