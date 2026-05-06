@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Walk Work With Pan | 潘红英</title>
+    <title>Walk Work With Pan | Hongying Pan</title>
     <style>
         :root {
-            var(--brand-bg): #E3D4C5;  
-            --brand-bg: #E3D4C5;
+            /* 柔和燕麦米色，与 Logo 背景完美融合 */
+            --brand-bg: #E3D4C5;  
             --brand-brown: #6d4c41; 
             --brand-accent: #a1887f; 
             --white: rgba(255, 255, 255, 0.6); 
+        }
+
+        /* 1. 声明并引入你的专属手写字体 (确保 myfont.ttf 已上传至同一文件夹) */
+        @font-face {
+            font-family: 'MyCustomFont'; 
+            src: url('myfont.ttf') format('truetype'); 
+            font-weight: normal;
+            font-style: normal;
         }
 
         body {
@@ -35,7 +43,7 @@
             z-index: 1000;
         }
 
-        /* Logo 区域 */
+        /* Logo 区域占据 60% */
         .logo-area {
             flex: 0 0 60%; 
             display: flex;
@@ -49,10 +57,10 @@
             max-height: 200px; 
             object-fit: contain;
             object-position: left;
-            mix-blend-mode: multiply; 
+            mix-blend-mode: multiply; /* 消除图片底色色差 */
         }
 
-        /* 右侧操作区 */
+        /* 右侧操作区占据 40% */
         .nav-right {
             flex: 0 0 40%;
             display: flex;
@@ -125,10 +133,24 @@
         }
 
         .hero-text { flex: 1; min-width: 350px; }
-        .hero-text h1 { font-size: 3.5rem; margin: 0; color: var(--brand-brown); }
-        .hero-text h2 { font-weight: 300; font-size: 1.5rem; margin: 10px 0 20px; color: var(--brand-accent); }
+        
+        /* 将你的名字应用手写体 */
+        .hero-text h1 { 
+            font-family: 'MyCustomFont', 'PingFang SC', sans-serif; /* 优先调用手写体 */
+            font-size: 4.5rem; /* 增大字号彰显气场 */
+            margin: 0; 
+            color: var(--brand-brown); 
+            letter-spacing: 2px;
+        }
+        
+        .hero-text h2 { 
+            font-weight: 300; 
+            font-size: 1.5rem; 
+            margin: 10px 0 20px; 
+            color: var(--brand-accent); 
+        }
 
-        /* 头像设计 */
+        /* 解决人像被光环遮挡的最终版头像设计 */
         .profile-wrapper {
             flex: 0 0 280px;
             height: 280px;
@@ -143,7 +165,7 @@
             height: 100%;
             border-radius: 50%; 
             object-fit: cover; 
-            object-position: center 15%; 
+            object-position: center 15%; /* 视觉中心上移 15%，完美避开边框遮挡面部 */
             border: 4px solid var(--brand-bg); 
             box-sizing: border-box;
         }
@@ -193,6 +215,7 @@
             .hero { text-align: center; justify-content: center; }
             .logo-area { flex: 0 0 100%; justify-content: center; margin-bottom: 15px; }
             .nav-right { flex: 0 0 100%; justify-content: center; flex-direction: column; gap: 20px; }
+            .hero-text h1 { font-size: 3.5rem; }
         }
     </style>
 </head>
@@ -214,31 +237,32 @@
             <a href="https://www.instagram.com/cleopaaatra___/" target="_blank" class="social-icon icon-ig" aria-label="Instagram">
                 <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
             </a>
-            <!-- WeChat (点击复制微信号) -->
-            <a onclick="navigator.clipboard.writeText('931916363'); alert('微信号 931916363 已复制到剪贴板！\nWeChat ID copied to clipboard!');" class="social-icon icon-wc" aria-label="WeChat" title="Click to copy WeChat ID: 931916363">
+            <!-- WeChat -->
+            <a onclick="navigator.clipboard.writeText('931916363'); alert('WeChat ID 931916363 copied to clipboard! \n微信号 931916363 已复制！');" class="social-icon icon-wc" aria-label="WeChat" title="Click to copy WeChat ID: 931916363">
                 <svg viewBox="0 0 24 24"><path d="M8.2 13.9c-3.7 0-6.7-2.5-6.7-5.6 0-3.1 3-5.6 6.7-5.6 3.7 0 6.7 2.5 6.7 5.6 0 3.1-3 5.6-6.7 5.6zm-1.8-6.1c-.4 0-.8.3-.8.8s.4.8.8.8.8-.3.8-.8-.4-.8-.8-.8zm3.6 0c-.4 0-.8.3-.8.8s.4.8.8.8.8-.3.8-.8-.3-.8-.8-.8zm8.6 11.5c-2.9 0-5.3-2-5.3-4.4 0-2.4 2.4-4.4 5.3-4.4s5.3 2 5.3 4.4-2.4 4.4-5.3 4.4zm-1.4-4.8c-.3 0-.6.2-.6.6s.3.6.6.6.6-.2.6-.6-.3-.6-.6-.6zm2.8 0c-.3 0-.6.2-.6.6s.3.6.6.6.6-.2.6-.6-.2-.6-.6-.6z"/></svg>
             </a>
         </div>
         
+        <!-- 语言切换顺序更新为 EN | DE | 中文 -->
         <div class="lang-switch">
-            <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
-            <button id="btn-en" onclick="setLang('en')">EN</button>
+            <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
             <button id="btn-de" onclick="setLang('de')">DE</button>
+            <button id="btn-zh" onclick="setLang('zh')">中文</button>
         </div>
     </div>
 </nav>
 
 <section class="hero">
     <div class="hero-text">
-        <h1 id="name">潘红英</h1>
-        <h2 id="title">跨文化商务协调专家</h2>
+        <h1 id="name">Hongying Pan</h1>
+        <h2 id="title">Cross-Cultural Specialist</h2>
         <p id="desc" style="font-size: 1.15rem; max-width: 600px;">
-            社会文化人类学硕士。深谙中欧文化差异，提供中、德、英三语一站式商务解决方案。消除沟通壁垒，让每一次连接都精准高效。
+            M.A. in Social and Cultural Anthropology. Expert in Sino-European cultural bridge-building with trilingual precision in business solutions.
         </p>
     </div>
     
     <div class="profile-wrapper">
-        <img src="avatar.jpg" alt="潘红英" class="profile-img">
+        <img src="avatar.jpg" alt="Profile Avatar" class="profile-img">
     </div>
 </section>
 
@@ -252,23 +276,12 @@
         <a href="https://www.instagram.com/cleopaaatra___/" target="_blank">Instagram</a> | 
         <span class="wechat-text">WeChat: 931916363</span>
     </div>
-    <p id="footer-info">Based in Shanghai, flexible for traveling </p>
+    <p id="footer-info">Based in Shanghai (Flexible Travel) </p>
     <p>© 2026 Walk Work With Pan. All rights reserved.</p>
 </footer>
 
 <script>
 const content = {
-    zh: {
-        name: "潘红英",
-        title: "跨文化商务协调专家",
-        desc: "社会文化人类学硕士。深谙中欧文化差异，提供中、德、英三语一站式商务解决方案。消除沟通壁垒，让每一次连接都精准高效。",
-        items: [
-            {t: "商务翻译", d: "提供中德/中英商务会议交传、合同与技术文档笔译及邮件润色。"},
-            {t: "商务接待", d: "全流程陪同：从展会陪同、工厂参观到商务宴请，确保沟通无碍。"},
-            {t: "欧洲地陪", d: "德国及欧洲深度在地导览，涵盖景点讲解、交通换乘及紧急事务处理。"},
-            {t: "留德咨询", d: "一手留德经验分享：院校申请、签证办理、租房避坑及跨文化适应指导。"}
-        ]
-    },
     en: {
         name: "Hongying Pan",
         title: "Cross-Cultural Specialist",
@@ -278,7 +291,8 @@ const content = {
             {t: "Business Escort", d: "Full-process support: trade fairs, factory visits, and corporate hospitality."},
             {t: "Local Guiding", d: "In-depth tours in Germany/Europe, logistics, and emergency management."},
             {t: "Consulting", d: "Expert advice on German university applications and cultural integration."}
-        ]
+        ],
+        footerText: "Based in Shanghai (Flexible Travel)"
     },
     de: {
         name: "Hongying Pan",
@@ -289,7 +303,20 @@ const content = {
             {t: "Begleitung", d: "Umfassende Betreuung bei Messen, Werksbesuchen und Geschäftsessen."},
             {t: "Reiseleitung", d: "Exklusive Touren in Deutschland/Europa und professionelles Krisenmanagement."},
             {t: "Studienberatung", d: "Insider-Tipps für Bewerbungen in Deutschland und kulturelle Anpassung."}
-        ]
+        ],
+        footerText: "Wohnhaft in Shanghai (Reisebereitschaft)"
+    },
+    zh: {
+        name: "潘红英",
+        title: "跨文化商务协调专家",
+        desc: "社会文化人类学硕士。深谙中欧文化差异，提供中、德、英三语一站式商务解决方案。消除沟通壁垒，让每一次连接都精准高效。",
+        items: [
+            {t: "商务翻译", d: "提供中德/中英商务会议交传、合同与技术文档笔译及邮件润色。"},
+            {t: "商务接待", d: "全流程陪同：从展会陪同、工厂参观到商务宴请，确保沟通无碍。"},
+            {t: "中国及欧洲地陪", d: "中国、德国及欧洲深度在地导览，涵盖景点讲解、交通换乘及紧急事务处理。"},
+            {t: "留德咨询", d: "一手留德经验分享：院校申请、签证办理、租房避坑及跨文化适应指导。"}
+        ],
+        footerText: "常驻地：上海 (可灵活差旅) | 技能：摄影、中西餐烹饪"
     }
 };
 
@@ -300,6 +327,8 @@ function setLang(lang) {
     document.getElementById('name').innerText = content[lang].name;
     document.getElementById('title').innerText = content[lang].title;
     document.getElementById('desc').innerText = content[lang].desc;
+    document.getElementById('footer-info').innerText = content[lang].footerText;
+    document.documentElement.lang = lang; 
 
     const grid = document.getElementById('services');
     grid.innerHTML = content[lang].items.map(i => `
@@ -310,7 +339,8 @@ function setLang(lang) {
     `).join('');
 }
 
-setLang('zh');
+// 初始化加载语言：英语
+setLang('en');
 </script>
 
 </body>
