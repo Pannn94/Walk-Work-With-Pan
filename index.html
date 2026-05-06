@@ -6,8 +6,8 @@
     <title>Walk Work With Pan | 潘红英</title>
     <style>
         :root {
-            /* 调整为更贴近你 Logo 的柔和燕麦米色 */
-            --brand-bg: #E3D4C5;  
+            var(--brand-bg): #E3D4C5;  
+            --brand-bg: #E3D4C5;
             --brand-brown: #6d4c41; 
             --brand-accent: #a1887f; 
             --white: rgba(255, 255, 255, 0.6); 
@@ -22,7 +22,7 @@
             transition: background-color 0.3s;
         }
 
-        /* 顶部导航栏 - 增加了上下内边距以容纳更大的 Logo */
+        /* 顶部导航栏 */
         nav {
             display: flex;
             justify-content: space-between;
@@ -35,32 +35,39 @@
             z-index: 1000;
         }
 
+        /* Logo 区域 */
         .logo-area {
-            flex: 0 0 66.66%; 
+            flex: 0 0 60%; 
             display: flex;
             align-items: center;
         }
 
-        /* 关键升级：Logo 尺寸放大 + 背景无缝融合 */
         .logo-area img {
             width: 100%;
-            max-width: 480px; /* 最大宽度大幅提升（原来是350px） */
+            max-width: 480px; 
             height: auto;
-            max-height: 200px; /* 最大高度提升（原来是120px） */
+            max-height: 200px; 
             object-fit: contain;
             object-position: left;
-            mix-blend-mode: multiply; /* CSS 魔法：消除图片底色色差，完美融入网页 */
+            mix-blend-mode: multiply; 
         }
 
+        /* 右侧操作区 */
         .nav-right {
-            flex: 0 0 33.33%;
+            flex: 0 0 40%;
             display: flex;
             align-items: center;
             justify-content: flex-end;
             gap: 15px;
         }
 
-        .ig-link {
+        /* 社交媒体图标区 */
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icon {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -71,17 +78,22 @@
             border-radius: 50%;
             text-decoration: none;
             transition: transform 0.3s ease, background 0.3s ease;
+            cursor: pointer;
         }
 
-        .ig-link:hover {
+        .social-icon:hover {
             transform: scale(1.1);
-            background: #E1306C;
             color: #fff;
         }
 
-        .ig-link svg {
-            width: 20px;
-            height: 20px;
+        /* 各平台的专属悬停颜色 */
+        .icon-in:hover { background: #0077b5; } /* LinkedIn 蓝 */
+        .icon-ig:hover { background: #E1306C; } /* IG 渐变红 */
+        .icon-wc:hover { background: #07c160; } /* 微信绿 */
+
+        .social-icon svg {
+            width: 18px;
+            height: 18px;
             fill: currentColor;
         }
 
@@ -102,6 +114,7 @@
             color: var(--brand-bg);
         }
 
+        /* Hero 区域 */
         .hero {
             padding: 60px 10%;
             display: flex;
@@ -115,11 +128,12 @@
         .hero-text h1 { font-size: 3.5rem; margin: 0; color: var(--brand-brown); }
         .hero-text h2 { font-weight: 300; font-size: 1.5rem; margin: 10px 0 20px; color: var(--brand-accent); }
 
+        /* 头像设计 */
         .profile-wrapper {
             flex: 0 0 280px;
             height: 280px;
             border-radius: 50%;
-            padding: 8px;
+            padding: 5px; 
             background: linear-gradient(135deg, var(--brand-brown), var(--brand-accent));
             box-shadow: 0 15px 35px rgba(109, 76, 65, 0.15);
         }
@@ -129,11 +143,12 @@
             height: 100%;
             border-radius: 50%; 
             object-fit: cover; 
-            object-position: center; 
-            border: 5px solid var(--brand-bg); 
+            object-position: center 15%; 
+            border: 4px solid var(--brand-bg); 
             box-sizing: border-box;
         }
 
+        /* 服务区域 */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -161,27 +176,23 @@
             margin-bottom: 15px;
         }
 
+        /* 底部 */
         footer {
             text-align: center;
             padding: 60px 20px;
             background: rgba(109, 76, 65, 0.05);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         .footer-social { margin-bottom: 15px; }
         .footer-social a { color: var(--brand-brown); text-decoration: none; font-weight: bold; transition: color 0.3s ease; }
         .footer-social a:hover { color: #E1306C; }
+        .footer-social .wechat-text { font-weight: bold; color: var(--brand-brown); margin-left: 5px; }
 
         @media (max-width: 900px) {
             .hero { text-align: center; justify-content: center; }
-            .logo-area { flex: 0 0 50%; }
-            .nav-right { flex: 0 0 50%; }
-        }
-        @media (max-width: 600px) {
-            nav { flex-direction: column; gap: 15px; }
-            .logo-area { flex: 0 0 100%; justify-content: center; }
-            .logo-area img { object-position: center; }
-            .nav-right { flex: 0 0 100%; justify-content: center; }
+            .logo-area { flex: 0 0 100%; justify-content: center; margin-bottom: 15px; }
+            .nav-right { flex: 0 0 100%; justify-content: center; flex-direction: column; gap: 20px; }
         }
     </style>
 </head>
@@ -193,12 +204,21 @@
     </div>
     
     <div class="nav-right">
-        <!-- Instagram 徽标链接 -->
-        <a href="https://www.instagram.com/cleopaaatra___/" target="_blank" class="ig-link" aria-label="Instagram">
-            <svg viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-            </svg>
-        </a>
+        <!-- 社交媒体图标组 -->
+        <div class="social-links">
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/hongying-pan-287275332/" target="_blank" class="social-icon icon-in" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/cleopaaatra___/" target="_blank" class="social-icon icon-ig" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <!-- WeChat (点击复制微信号) -->
+            <a onclick="navigator.clipboard.writeText('931916363'); alert('微信号 931916363 已复制到剪贴板！\nWeChat ID copied to clipboard!');" class="social-icon icon-wc" aria-label="WeChat" title="Click to copy WeChat ID: 931916363">
+                <svg viewBox="0 0 24 24"><path d="M8.2 13.9c-3.7 0-6.7-2.5-6.7-5.6 0-3.1 3-5.6 6.7-5.6 3.7 0 6.7 2.5 6.7 5.6 0 3.1-3 5.6-6.7 5.6zm-1.8-6.1c-.4 0-.8.3-.8.8s.4.8.8.8.8-.3.8-.8-.4-.8-.8-.8zm3.6 0c-.4 0-.8.3-.8.8s.4.8.8.8.8-.3.8-.8-.3-.8-.8-.8zm8.6 11.5c-2.9 0-5.3-2-5.3-4.4 0-2.4 2.4-4.4 5.3-4.4s5.3 2 5.3 4.4-2.4 4.4-5.3 4.4zm-1.4-4.8c-.3 0-.6.2-.6.6s.3.6.6.6.6-.2.6-.6-.3-.6-.6-.6zm2.8 0c-.3 0-.6.2-.6.6s.3.6.6.6.6-.2.6-.6-.2-.6-.6-.6z"/></svg>
+            </a>
+        </div>
         
         <div class="lang-switch">
             <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
@@ -215,28 +235,10 @@
         <p id="desc" style="font-size: 1.15rem; max-width: 600px;">
             社会文化人类学硕士。深谙中欧文化差异，提供中、德、英三语一站式商务解决方案。消除沟通壁垒，让每一次连接都精准高效。
         </p>
-        
-  <!-- 圆环头像结构 -->
-  /* 调整后的高级圆环头像设计 */
-        .profile-wrapper {
-            flex: 0 0 280px;
-            height: 280px;
-            border-radius: 50%;
-            padding: 5px; /* 将外环稍微调细，留出更多空间 */
-            background: linear-gradient(135deg, var(--brand-brown), var(--brand-accent));
-            box-shadow: 0 15px 35px rgba(109, 76, 65, 0.15);
-        }
-
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%; 
-            object-fit: cover; 
-            /* 关键魔法：将视觉中心上移至 15% 的位置，完美避开边框遮挡面部 */
-            object-position: center 15%; 
-            border: 4px solid var(--brand-bg); /* 将内环调细，显得更精致 */
-            box-sizing: border-box;
-        }
+    </div>
+    
+    <div class="profile-wrapper">
+        <img src="avatar.jpg" alt="潘红英" class="profile-img">
     </div>
 </section>
 
@@ -245,10 +247,12 @@
 </div>
 
 <footer>
-    <div class="footer-social">
-        Follow me on <a href="https://www.instagram.com/cleopaaatra___/" target="_blank">Instagram (@cleopaaatra___)</a>
+    <div class="footer-social" id="footer-social">
+        Connect: <a href="https://www.linkedin.com/in/hongying-pan-287275332/" target="_blank">LinkedIn</a> | 
+        <a href="https://www.instagram.com/cleopaaatra___/" target="_blank">Instagram</a> | 
+        <span class="wechat-text">WeChat: 931916363</span>
     </div>
-    <p id="footer-info">Based in Shanghai, flexible for traveling </p>
+    <p id="footer-info">常驻地：上海 (可灵活差旅) | 技能：摄影、中西餐烹饪</p>
     <p>© 2026 Walk Work With Pan. All rights reserved.</p>
 </footer>
 
