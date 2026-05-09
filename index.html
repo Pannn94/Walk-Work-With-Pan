@@ -6,24 +6,23 @@
     <title>Walk Work With Pan | Hongying Pan</title>
     <style>
         :root {
-            /* 柔和燕麦米色，与 Logo 背景完美融合 */
-            --brand-bg: #E3D4C5;  
+            var(--brand-bg): #E3D4C5;  
+            --brand-bg: #E3D4C5;
             --brand-brown: #6d4c41; 
             --brand-accent: #a1887f; 
             --white: rgba(255, 255, 255, 0.6); 
         }
 
-        /* 1. 声明并引入你的专属手写字体 (确保 myfont.ttf 已上传至同一文件夹) */
+        /* 1. 声明并引入你的专属手写字体 */
         @font-face {
             font-family: 'MyCustomFont'; 
-            src: url('myfont.ttf') format('truetype'); 
+            src: url('myfont.ttf') format('truetype'); /* 如果下载的是otf，请改为 myfont.otf 和 opentype */
             font-weight: normal;
             font-style: normal;
         }
 
-body {
-            /* 把 MyCustomFont 放在最前面，这样全站都会优先使用它 */
-            font-family: 'MyCustomFont', 'PingFang SC', 'Hiragino Sans GB', 'Helvetica Neue', sans-serif;
+        body {
+            font-family: 'PingFang SC', 'Hiragino Sans GB', 'Helvetica Neue', sans-serif;
             margin: 0;
             background-color: var(--brand-bg); 
             color: var(--brand-brown);
@@ -44,7 +43,6 @@ body {
             z-index: 1000;
         }
 
-        /* Logo 区域占据 60% */
         .logo-area {
             flex: 0 0 60%; 
             display: flex;
@@ -58,10 +56,9 @@ body {
             max-height: 200px; 
             object-fit: contain;
             object-position: left;
-            mix-blend-mode: multiply; /* 消除图片底色色差 */
+            mix-blend-mode: multiply; 
         }
 
-        /* 右侧操作区占据 40% */
         .nav-right {
             flex: 0 0 40%;
             display: flex;
@@ -70,143 +67,114 @@ body {
             gap: 15px;
         }
 
-        /* 社交媒体图标区 */
-        .social-links {
-            display: flex;
-            gap: 10px;
-        }
-
+        .social-links { display: flex; gap: 10px; }
         .social-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            background: var(--brand-brown);
-            color: var(--brand-bg);
-            border-radius: 50%;
-            text-decoration: none;
+            display: flex; align-items: center; justify-content: center;
+            width: 36px; height: 36px;
+            background: var(--brand-brown); color: var(--brand-bg);
+            border-radius: 50%; text-decoration: none;
             transition: transform 0.3s ease, background 0.3s ease;
             cursor: pointer;
         }
-
-        .social-icon:hover {
-            transform: scale(1.1);
-            color: #fff;
-        }
-
-        /* 各平台的专属悬停颜色 */
-        .icon-in:hover { background: #0077b5; } /* LinkedIn 蓝 */
-        .icon-ig:hover { background: #E1306C; } /* IG 渐变红 */
-        .icon-wc:hover { background: #07c160; } /* 微信绿 */
-
-        .social-icon svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
+        .social-icon:hover { transform: scale(1.1); color: #fff; }
+        .icon-in:hover { background: #0077b5; } 
+        .icon-ig:hover { background: #E1306C; } 
+        .icon-wc:hover { background: #07c160; } 
+        .social-icon svg { width: 18px; height: 18px; fill: currentColor; }
 
         .lang-switch button {
-            background: none;
-            border: 1px solid var(--brand-brown);
-            color: var(--brand-brown);
-            padding: 6px 14px;
-            cursor: pointer;
-            margin-left: 5px;
-            font-size: 0.85rem;
-            border-radius: 20px;
-            transition: 0.3s;
+            background: none; border: 1px solid var(--brand-brown);
+            color: var(--brand-brown); padding: 6px 14px;
+            cursor: pointer; margin-left: 5px; font-size: 0.85rem;
+            border-radius: 20px; transition: 0.3s;
         }
-
-        .lang-switch button.active {
-            background: var(--brand-brown);
-            color: var(--brand-bg);
-        }
+        .lang-switch button.active { background: var(--brand-brown); color: var(--brand-bg); }
 
         /* Hero 区域 */
         .hero {
             padding: 60px 10%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 50px;
-            flex-wrap: wrap;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 50px; flex-wrap: wrap;
         }
 
         .hero-text { flex: 1; min-width: 350px; }
-        
-        /* 将你的名字应用手写体 */
         .hero-text h1 { 
-            font-family: 'MyCustomFont', 'PingFang SC', sans-serif; /* 优先调用手写体 */
-            font-size: 4.5rem; /* 增大字号彰显气场 */
-            margin: 0; 
-            color: var(--brand-brown); 
-            letter-spacing: 2px;
+            font-family: 'MyCustomFont', 'PingFang SC', sans-serif; 
+            font-size: 4.5rem; margin: 0; color: var(--brand-brown); letter-spacing: 2px;
         }
-        
-        .hero-text h2 { 
-            font-weight: 300; 
-            font-size: 1.5rem; 
-            margin: 10px 0 20px; 
-            color: var(--brand-accent); 
-        }
+        .hero-text h2 { font-weight: 300; font-size: 1.5rem; margin: 10px 0 20px; color: var(--brand-accent); }
 
-        /* 解决人像被光环遮挡的最终版头像设计 */
         .profile-wrapper {
-            flex: 0 0 280px;
-            height: 280px;
-            border-radius: 50%;
-            padding: 5px; 
+            flex: 0 0 280px; height: 280px; border-radius: 50%; padding: 5px; 
             background: linear-gradient(135deg, var(--brand-brown), var(--brand-accent));
             box-shadow: 0 15px 35px rgba(109, 76, 65, 0.15);
         }
-
         .profile-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%; 
-            object-fit: cover; 
-            object-position: center 15%; /* 视觉中心上移 15%，完美避开边框遮挡面部 */
-            border: 4px solid var(--brand-bg); 
-            box-sizing: border-box;
+            width: 100%; height: 100%; border-radius: 50%; 
+            object-fit: cover; object-position: center 15%; 
+            border: 4px solid var(--brand-bg); box-sizing: border-box;
         }
 
-        /* 服务区域 */
+        /* 服务卡片区域 */
         .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 20px 10% 80px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px; padding: 20px 10% 40px;
         }
-
         .card {
-            background: var(--white);
-            padding: 40px 30px;
-            border-radius: 20px;
-            text-align: center;
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(109, 76, 65, 0.1);
-            backdrop-filter: blur(5px);
+            background: var(--white); padding: 40px 30px; border-radius: 20px;
+            text-align: center; transition: transform 0.3s ease;
+            border: 1px solid rgba(109, 76, 65, 0.1); backdrop-filter: blur(5px);
         }
-
         .card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(109,76,65,0.1); }
         .card h3 { 
-            margin-top: 0;
-            font-size: 1.4rem;
-            border-bottom: 2px solid var(--brand-brown);
-            display: inline-block;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
+            margin-top: 0; font-size: 1.4rem; border-bottom: 2px solid var(--brand-brown);
+            display: inline-block; padding-bottom: 8px; margin-bottom: 15px;
+        }
+
+        /* 新增：照片画廊区域 */
+        .gallery-section {
+            padding: 40px 10% 80px;
+            text-align: center;
+        }
+        
+        .gallery-title {
+            font-size: 2rem;
+            color: var(--brand-brown);
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(109, 76, 65, 0.1);
+            aspect-ratio: 4 / 3; /* 统一照片比例，看起来更整齐 */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        /* 鼠标悬停时照片优雅放大 */
+        .gallery-item:hover img {
+            transform: scale(1.08);
         }
 
         /* 底部 */
         footer {
-            text-align: center;
-            padding: 60px 20px;
-            background: rgba(109, 76, 65, 0.05);
-            font-size: 0.95rem;
+            text-align: center; padding: 60px 20px; background: rgba(109, 76, 65, 0.05); font-size: 0.95rem;
         }
-
         .footer-social { margin-bottom: 15px; }
         .footer-social a { color: var(--brand-brown); text-decoration: none; font-weight: bold; transition: color 0.3s ease; }
         .footer-social a:hover { color: #E1306C; }
@@ -226,25 +194,12 @@ body {
     <div class="logo-area">
         <img src="logo.png" alt="Walk Work With Pan Logo">
     </div>
-    
     <div class="nav-right">
-        <!-- 社交媒体图标组 -->
         <div class="social-links">
-            <!-- LinkedIn -->
-            <a href="https://www.linkedin.com/in/hongying-pan-287275332/" target="_blank" class="social-icon icon-in" aria-label="LinkedIn">
-                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/cleopaaatra___/" target="_blank" class="social-icon icon-ig" aria-label="Instagram">
-                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-            </a>
-            <!-- WeChat -->
-            <a onclick="navigator.clipboard.writeText('931916363'); alert('WeChat ID 931916363 copied to clipboard! \n微信号 931916363 已复制！');" class="social-icon icon-wc" aria-label="WeChat" title="Click to copy WeChat ID: 931916363">
-                <svg viewBox="0 0 24 24"><path d="M8.2 13.9c-3.7 0-6.7-2.5-6.7-5.6 0-3.1 3-5.6 6.7-5.6 3.7 0 6.7 2.5 6.7 5.6 0 3.1-3 5.6-6.7 5.6zm-1.8-6.1c-.4 0-.8.3-.8.8s.4.8.8.8.8-.3.8-.8-.4-.8-.8-.8zm3.6 0c-.4 0-.8.3-.8.8s.4.8.8.8.8-.3.8-.8-.3-.8-.8-.8zm8.6 11.5c-2.9 0-5.3-2-5.3-4.4 0-2.4 2.4-4.4 5.3-4.4s5.3 2 5.3 4.4-2.4 4.4-5.3 4.4zm-1.4-4.8c-.3 0-.6.2-.6.6s.3.6.6.6.6-.2.6-.6-.3-.6-.6-.6zm2.8 0c-.3 0-.6.2-.6.6s.3.6.6.6.6-.2.6-.6-.2-.6-.6-.6z"/></svg>
-            </a>
+            <a href="https://www.linkedin.com/in/hongying-pan-287275332/" target="_blank" class="social-icon icon-in" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+            <a href="https://www.instagram.com/cleopaaatra___/" target="_blank" class="social-icon icon-ig" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+            <a onclick="navigator.clipboard.writeText('931916363'); alert('WeChat ID 931916363 copied to clipboard! \n微信号 931916363 已复制！');" class="social-icon icon-wc" aria-label="WeChat" title="Click to copy WeChat ID: 931916363"><svg viewBox="0 0 24 24"><path d="M8.2 13.9c-3.7 0-6.7-2.5-6.7-5.6 0-3.1 3-5.6 6.7-5.6 3.7 0 6.7 2.5 6.7 5.6 0 3.1-3 5.6-6.7 5.6zm-1.8-6.1c-.4 0-.8.3-.8.8s.4.8.8.8.8-.3.8-.8-.4-.8-.8-.8zm3.6 0c-.4 0-.8.3-.8.8s.4.8.8.8.8-.3.8-.8-.3-.8-.8-.8zm8.6 11.5c-2.9 0-5.3-2-5.3-4.4 0-2.4 2.4-4.4 5.3-4.4s5.3 2 5.3 4.4-2.4 4.4-5.3 4.4zm-1.4-4.8c-.3 0-.6.2-.6.6s.3.6.6.6.6-.2.6-.6-.3-.6-.6-.6zm2.8 0c-.3 0-.6.2-.6.6s.3.6.6.6.6-.2.6-.6-.2-.6-.6-.6z"/></svg></a>
         </div>
-        
-        <!-- 语言切换顺序更新为 EN | DE | 中文 -->
         <div class="lang-switch">
             <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
             <button id="btn-de" onclick="setLang('de')">DE</button>
@@ -261,15 +216,28 @@ body {
             M.A. in Social and Cultural Anthropology. Expert in Sino-European cultural bridge-building with trilingual precision in business solutions.
         </p>
     </div>
-    
     <div class="profile-wrapper">
         <img src="avatar.jpg" alt="Profile Avatar" class="profile-img">
     </div>
 </section>
 
 <div class="grid" id="services">
-    <!-- 内容加载 -->
-</div>
+    </div>
+
+<section class="gallery-section">
+    <h2 class="gallery-title" id="gallery-title">Business & Travel Moments</h2>
+    <div class="gallery-grid">
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Factory Visit">
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80" alt="Business Meeting">
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" alt="Trade Fair">
+        </div>
+    </div>
+</section>
 
 <footer>
     <div class="footer-social" id="footer-social">
@@ -277,7 +245,7 @@ body {
         <a href="https://www.instagram.com/cleopaaatra___/" target="_blank">Instagram</a> | 
         <span class="wechat-text">WeChat: 931916363</span>
     </div>
-    <p id="footer-info">Based in Shanghai (Flexible Travel) </p>
+    <p id="footer-info">Based in Shanghai (Flexible Travel) | Skills: Photography, Culinary Arts</p>
     <p>© 2026 Walk Work With Pan. All rights reserved.</p>
 </footer>
 
@@ -290,10 +258,11 @@ const content = {
         items: [
             {t: "Translation", d: "Interpretation & translation (ZH/DE/EN) for meetings, contracts, and tech docs."},
             {t: "Business Escort", d: "Full-process support: trade fairs, factory visits, and corporate hospitality."},
-            {t: "Local Guiding", d: "In-depth tours in China/Germany/Europe, logistics, and emergency management."},
+            {t: "Local Guiding", d: "In-depth tours in Germany/Europe, logistics, and emergency management."},
             {t: "Consulting", d: "Expert advice on German university applications and cultural integration."}
         ],
-        footerText: "Based in Shanghai (Flexible Travel)"
+        galleryTitle: "Business & Travel Moments",
+        footerText: "Based in Shanghai (Flexible Travel) | Skills: Photography, Culinary Arts"
     },
     de: {
         name: "Hongying Pan",
@@ -302,10 +271,11 @@ const content = {
         items: [
             {t: "Dolmetschen", d: "Verhandlungsdolmetschen und Fachübersetzungen (ZH/DE/EN) für Business."},
             {t: "Begleitung", d: "Umfassende Betreuung bei Messen, Werksbesuchen und Geschäftsessen."},
-            {t: "Reiseleitung", d: "Exklusive Touren in China/Deutschland/Europa und professionelles Krisenmanagement."},
+            {t: "Reiseleitung", d: "Exklusive Touren in Deutschland/Europa und professionelles Krisenmanagement."},
             {t: "Studienberatung", d: "Insider-Tipps für Bewerbungen in Deutschland und kulturelle Anpassung."}
         ],
-        footerText: "Wohnhaft in Shanghai (Reisebereitschaft)"
+        galleryTitle: "Business & Reise Impressionen",
+        footerText: "Wohnhaft in Shanghai (Reisebereitschaft) | Fähigkeiten: Fotografie, Kochkunst"
     },
     zh: {
         name: "潘红英",
@@ -314,10 +284,11 @@ const content = {
         items: [
             {t: "商务翻译", d: "提供中德/中英商务会议交传、合同与技术文档笔译及邮件润色。"},
             {t: "商务接待", d: "全流程陪同：从展会陪同、工厂参观到商务宴请，确保沟通无碍。"},
-            {t: "中国及欧洲地陪", d: "中国、德国及欧洲深度在地导览，涵盖景点讲解、交通换乘及紧急事务处理。"},
+            {t: "欧洲地陪", d: "德国及欧洲深度在地导览，涵盖景点讲解、交通换乘及紧急事务处理。"},
             {t: "留德咨询", d: "一手留德经验分享：院校申请、签证办理、租房避坑及跨文化适应指导。"}
         ],
-        footerText: "常驻地：上海 (可灵活差旅)"
+        galleryTitle: "实地考察与带团掠影",
+        footerText: "常驻地：上海 (可灵活差旅) | 技能：摄影、中西餐烹饪"
     }
 };
 
@@ -328,6 +299,7 @@ function setLang(lang) {
     document.getElementById('name').innerText = content[lang].name;
     document.getElementById('title').innerText = content[lang].title;
     document.getElementById('desc').innerText = content[lang].desc;
+    document.getElementById('gallery-title').innerText = content[lang].galleryTitle;
     document.getElementById('footer-info').innerText = content[lang].footerText;
     document.documentElement.lang = lang; 
 
