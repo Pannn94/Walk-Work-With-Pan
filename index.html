@@ -2,69 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Walk Work With Pan | Hongying Pan</title>
     <style>
         :root {
-            var(--brand-bg): #E3D4C5;  
             --brand-bg: #E3D4C5;
             --brand-brown: #6d4c41; 
             --brand-accent: #a1887f; 
             --white: rgba(255, 255, 255, 0.6); 
         }
 
-        /* 1. 声明并引入你的专属手写字体 */
         @font-face {
             font-family: 'MyCustomFont'; 
-            src: url('myfont.ttf') format('truetype'); /* 如果下载的是otf，请改为 myfont.otf 和 opentype */
+            src: url('myfont.ttf') format('truetype'); 
             font-weight: normal;
             font-style: normal;
+            font-display: swap; /* 优化字体加载速度 */
         }
 
         body {
-            font-family: 'myfont', 'Hiragino Sans GB', 'Helvetica Neue', sans-serif;
+            font-family: 'PingFang SC', 'Hiragino Sans GB', 'Helvetica Neue', sans-serif;
             margin: 0;
             background-color: var(--brand-bg); 
             color: var(--brand-brown);
             line-height: 1.6;
             transition: background-color 0.3s;
+            overflow-x: hidden; /* 防止手机端出现横向滚动条 */
         }
 
-        /* 顶部导航栏 */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%; 
-            background: rgba(227, 212, 197, 0.85); 
+            padding: 1.2rem 5%; 
+            background: rgba(227, 212, 197, 0.9); 
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* 兼容苹果手机 */
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(109, 76, 65, 0.05);
         }
 
         .logo-area {
-            flex: 0 0 60%; 
+            flex: 0 0 45%; 
             display: flex;
             align-items: center;
         }
 
         .logo-area img {
             width: 100%;
-            max-width: 480px; 
+            max-width: 400px; 
             height: auto;
-            max-height: 200px; 
+            max-height: 150px; 
             object-fit: contain;
             object-position: left;
             mix-blend-mode: multiply; 
         }
 
         .nav-right {
-            flex: 0 0 40%;
+            flex: 0 0 55%;
             display: flex;
             align-items: center;
             justify-content: flex-end;
             gap: 15px;
+            flex-wrap: wrap;
         }
 
         .social-links { display: flex; gap: 10px; }
@@ -82,32 +84,36 @@
         .icon-wc:hover { background: #07c160; } 
         .social-icon svg { width: 18px; height: 18px; fill: currentColor; }
 
+        .lang-switch { display: flex; flex-wrap: nowrap; }
         .lang-switch button {
             background: none; border: 1px solid var(--brand-brown);
-            color: var(--brand-brown); padding: 6px 14px;
+            color: var(--brand-brown); padding: 5px 12px;
             cursor: pointer; margin-left: 5px; font-size: 0.85rem;
             border-radius: 20px; transition: 0.3s;
+            white-space: nowrap;
         }
         .lang-switch button.active { background: var(--brand-brown); color: var(--brand-bg); }
 
-        /* Hero 区域 */
         .hero {
             padding: 60px 10%;
             display: flex; align-items: center; justify-content: space-between;
-            gap: 50px; flex-wrap: wrap;
+            gap: 40px; flex-wrap: wrap;
         }
 
-        .hero-text { flex: 1; min-width: 350px; }
+        .hero-text { flex: 1; min-width: 0; /* 修改了这里的 min-width 以适应手机 */ }
         .hero-text h1 { 
             font-family: 'MyCustomFont', 'PingFang SC', sans-serif; 
             font-size: 4.5rem; margin: 0; color: var(--brand-brown); letter-spacing: 2px;
+            line-height: 1.2;
         }
-        .hero-text h2 { font-weight: 300; font-size: 1.5rem; margin: 10px 0 20px; color: var(--brand-accent); }
+        .hero-text h2 { font-weight: 300; font-size: 1.5rem; margin: 15px 0 20px; color: var(--brand-accent); }
+        .hero-text p { font-size: 1.15rem; max-width: 600px; }
 
         .profile-wrapper {
             flex: 0 0 280px; height: 280px; border-radius: 50%; padding: 5px; 
             background: linear-gradient(135deg, var(--brand-brown), var(--brand-accent));
             box-shadow: 0 15px 35px rgba(109, 76, 65, 0.15);
+            margin: 0 auto; /* 保证在手机端居中 */
         }
         .profile-img {
             width: 100%; height: 100%; border-radius: 50%; 
@@ -115,76 +121,91 @@
             border: 4px solid var(--brand-bg); box-sizing: border-box;
         }
 
-        /* 服务卡片区域 */
         .grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px; padding: 20px 10% 40px;
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 缩小了最小宽度 */
+            gap: 25px; padding: 20px 10% 40px;
         }
         .card {
-            background: var(--white); padding: 40px 30px; border-radius: 20px;
+            background: var(--white); padding: 35px 25px; border-radius: 20px;
             text-align: center; transition: transform 0.3s ease;
             border: 1px solid rgba(109, 76, 65, 0.1); backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(109,76,65,0.1); }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(109,76,65,0.1); }
         .card h3 { 
-            margin-top: 0; font-size: 1.4rem; border-bottom: 2px solid var(--brand-brown);
+            margin-top: 0; font-size: 1.3rem; border-bottom: 2px solid var(--brand-brown);
             display: inline-block; padding-bottom: 8px; margin-bottom: 15px;
         }
 
-        /* 新增：照片画廊区域 */
-        .gallery-section {
-            padding: 40px 10% 80px;
-            text-align: center;
-        }
-        
+        .gallery-section { padding: 40px 10% 80px; text-align: center; }
         .gallery-title {
-            font-size: 2rem;
-            color: var(--brand-brown);
-            margin-bottom: 40px;
-            font-weight: 300;
-            letter-spacing: 1px;
+            font-size: 2rem; color: var(--brand-brown); margin-bottom: 35px;
+            font-weight: 300; letter-spacing: 1px;
         }
-
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 适应手机屏幕 */
             gap: 20px;
         }
-
         .gallery-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(109, 76, 65, 0.1);
-            aspect-ratio: 4 / 3; /* 统一照片比例，看起来更整齐 */
+            position: relative; border-radius: 15px; overflow: hidden;
+            box-shadow: 0 8px 25px rgba(109, 76, 65, 0.1); aspect-ratio: 4 / 3; 
         }
-
         .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+            width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;
+        }
+        /* 手机端取消 hover 放大效果，避免误触闪烁 */
+        @media (hover: hover) {
+            .gallery-item:hover img { transform: scale(1.08); }
         }
 
-        /* 鼠标悬停时照片优雅放大 */
-        .gallery-item:hover img {
-            transform: scale(1.08);
-        }
-
-        /* 底部 */
         footer {
-            text-align: center; padding: 60px 20px; background: rgba(109, 76, 65, 0.05); font-size: 0.95rem;
+            text-align: center; padding: 50px 20px; background: rgba(109, 76, 65, 0.05); font-size: 0.9rem;
         }
         .footer-social { margin-bottom: 15px; }
-        .footer-social a { color: var(--brand-brown); text-decoration: none; font-weight: bold; transition: color 0.3s ease; }
-        .footer-social a:hover { color: #E1306C; }
-        .footer-social .wechat-text { font-weight: bold; color: var(--brand-brown); margin-left: 5px; }
+        .footer-social a { color: var(--brand-brown); text-decoration: none; font-weight: bold; }
+        .footer-social .wechat-text { font-weight: bold; color: var(--brand-brown); margin-left: 5px; display: inline-block; }
 
+        /* ==========================================
+           响应式设计：平板电脑 (900px 以下)
+           ========================================== */
         @media (max-width: 900px) {
-            .hero { text-align: center; justify-content: center; }
-            .logo-area { flex: 0 0 100%; justify-content: center; margin-bottom: 15px; }
-            .nav-right { flex: 0 0 100%; justify-content: center; flex-direction: column; gap: 20px; }
+            .hero { text-align: center; justify-content: center; padding: 40px 5%; gap: 30px; flex-direction: column-reverse; }
             .hero-text h1 { font-size: 3.5rem; }
+            .hero-text p { margin: 0 auto; }
+            .nav-right { justify-content: flex-end; }
+            .grid, .gallery-section { padding-left: 5%; padding-right: 5%; }
+        }
+
+        /* ==========================================
+           响应式设计：智能手机 (600px 以下)
+           ========================================== */
+        @media (max-width: 600px) {
+            nav { flex-direction: column; padding: 15px 5%; gap: 15px; }
+            .logo-area { flex: 0 0 100%; justify-content: center; }
+            .logo-area img { max-height: 100px; }
+            .nav-right { flex: 0 0 100%; justify-content: center; flex-direction: column; gap: 15px; }
+            
+            .hero { padding: 30px 5%; }
+            .hero-text h1 { font-size: 2.8rem; }
+            .hero-text h2 { font-size: 1.2rem; }
+            .hero-text p { font-size: 1rem; }
+            
+            .profile-wrapper { flex: 0 0 200px; height: 200px; } /* 缩小头像比例 */
+            
+            .grid { grid-template-columns: 1fr; gap: 15px; } /* 服务卡片变单列 */
+            .gallery-grid { grid-template-columns: 1fr; } /* 照片变单列 */
+            .gallery-title { font-size: 1.6rem; }
+            
+            .social-links { gap: 15px; }
+            .social-icon { width: 40px; height: 40px; } /* 手机上稍微放大图标，方便手指点击 */
+        }
+        
+        /* 针对极小屏幕的微调 */
+        @media (max-width: 380px) {
+            .hero-text h1 { font-size: 2.2rem; }
+            .lang-switch button { padding: 4px 8px; font-size: 0.75rem; margin-left: 3px; }
         }
     </style>
 </head>
@@ -209,15 +230,16 @@
 </nav>
 
 <section class="hero">
+    <div class="profile-wrapper">
+        <img src="avatar.jpg" alt="Profile Avatar" class="profile-img">
+    </div>
+    
     <div class="hero-text">
         <h1 id="name">Hongying Pan</h1>
         <h2 id="title">Cross-Cultural Specialist</h2>
-        <p id="desc" style="font-size: 1.15rem; max-width: 600px;">
+        <p id="desc">
             M.A. in Social and Cultural Anthropology. Expert in Sino-European cultural bridge-building with trilingual precision in business solutions.
         </p>
-    </div>
-    <div class="profile-wrapper">
-        <img src="avatar.jpg" alt="Profile Avatar" class="profile-img">
     </div>
 </section>
 
@@ -228,13 +250,13 @@
     <h2 class="gallery-title" id="gallery-title">Business & Travel Moments</h2>
     <div class="gallery-grid">
         <div class="gallery-item">
-            <img src="factory1.jpg" alt="Factory Visit">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Factory Visit">
         </div>
         <div class="gallery-item">
-            <img src="meeting1.jpeg" alt="Business Meeting">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80" alt="Business Meeting">
         </div>
         <div class="gallery-item">
-            <img src="factory2.jpeg" alt="Factory Visit">
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" alt="Trade Fair">
         </div>
     </div>
 </section>
@@ -242,8 +264,8 @@
 <footer>
     <div class="footer-social" id="footer-social">
         Connect: <a href="https://www.linkedin.com/in/hongying-pan-287275332/" target="_blank">LinkedIn</a> | 
-        <a href="https://www.instagram.com/cleopaaatra___/" target="_blank">Instagram</a> | 
-        <span class="wechat-text">WeChat: 931916363</span>
+        <a href="https://www.instagram.com/cleopaaatra___/" target="_blank">Instagram</a> <br>
+        <span class="wechat-text" style="margin-top: 10px;">WeChat: 931916363</span>
     </div>
     <p id="footer-info">Based in Shanghai (Flexible Travel) | Skills: Photography, Culinary Arts</p>
     <p>© 2026 Walk Work With Pan. All rights reserved.</p>
@@ -257,25 +279,25 @@ const content = {
         desc: "M.A. in Social and Cultural Anthropology. Expert in Sino-European cultural bridge-building with trilingual precision in business solutions.",
         items: [
             {t: "Translation", d: "Interpretation & translation (ZH/DE/EN) for meetings, contracts, and tech docs."},
-            {t: "Business Companion", d: "Full-process support: trade fairs, factory visits, and corporate hospitality."},
-            {t: "Local Guiding", d: "In-depth tours in China/Germany/Europe, logistics, and emergency management."},
+            {t: "Business Escort", d: "Full-process support: trade fairs, factory visits, and corporate hospitality."},
+            {t: "Local Guiding", d: "In-depth tours in Germany/Europe, logistics, and emergency management."},
             {t: "Consulting", d: "Expert advice on German university applications and cultural integration."}
         ],
         galleryTitle: "Business & Travel Moments",
-        footerText: "Based in Shanghai (Flexible Travel)"
+        footerText: "Based in Shanghai (Flexible Travel) | Skills: Photography, Culinary Arts"
     },
     de: {
         name: "Hongying Pan",
         title: "Interkulturelle Koordinatorin",
-        desc: "M.A. Sozial- und Kulturanthropologie (FU Berlin). Brückenschlag zwischen China und Europa mit Sprach- und Kulturkompetenz.",
+        desc: "M.A. Sozial- und Kulturanthropologie. Brückenschlag zwischen China und Europa mit Sprach- und Kulturkompetenz.",
         items: [
             {t: "Dolmetschen", d: "Verhandlungsdolmetschen und Fachübersetzungen (ZH/DE/EN) für Business."},
             {t: "Begleitung", d: "Umfassende Betreuung bei Messen, Werksbesuchen und Geschäftsessen."},
-            {t: "Reiseleitung", d: "Exklusive Touren in China/Deutschland/Europa und professionelles Krisenmanagement."},
+            {t: "Reiseleitung", d: "Exklusive Touren in Deutschland/Europa und professionelles Krisenmanagement."},
             {t: "Studienberatung", d: "Insider-Tipps für Bewerbungen in Deutschland und kulturelle Anpassung."}
         ],
         galleryTitle: "Business & Reise Impressionen",
-        footerText: "Wohnhaft in Shanghai (Reisebereitschaft)"
+        footerText: "Wohnhaft in Shanghai (Reisebereitschaft) | Fähigkeiten: Fotografie, Kochkunst"
     },
     zh: {
         name: "潘红英",
@@ -284,11 +306,11 @@ const content = {
         items: [
             {t: "商务翻译", d: "提供中德/中英商务会议交传、合同与技术文档笔译及邮件润色。"},
             {t: "商务接待", d: "全流程陪同：从展会陪同、工厂参观到商务宴请，确保沟通无碍。"},
-            {t: "欧洲地陪", d: "中国、德国及欧洲深度在地导览，涵盖景点讲解、交通换乘及紧急事务处理。"},
+            {t: "欧洲地陪", d: "德国及欧洲深度在地导览，涵盖景点讲解、交通换乘及紧急事务处理。"},
             {t: "留德咨询", d: "一手留德经验分享：院校申请、签证办理、租房避坑及跨文化适应指导。"}
         ],
         galleryTitle: "实地考察与带团掠影",
-        footerText: "常驻地：上海 (可灵活差旅)"
+        footerText: "常驻地：上海 (可灵活差旅) | 技能：摄影、中西餐烹饪"
     }
 };
 
@@ -312,7 +334,6 @@ function setLang(lang) {
     `).join('');
 }
 
-// 初始化加载语言：英语
 setLang('en');
 </script>
 
