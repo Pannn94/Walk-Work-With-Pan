@@ -79,13 +79,10 @@
             cursor: pointer;
         }
         .social-icon:hover { transform: scale(1.1); color: #fff; }
-        
-        /* 社交图标专属悬停色 */
-        .icon-mail:hover { background: #ea4335; } /* 经典邮箱红 */
+        .icon-mail:hover { background: #ea4335; } 
         .icon-in:hover { background: #0077b5; } 
         .icon-ig:hover { background: #E1306C; } 
         .icon-wc:hover { background: #07c160; } 
-        
         .social-icon svg { width: 18px; height: 18px; fill: currentColor; }
 
         .lang-switch { display: flex; flex-wrap: nowrap; }
@@ -123,6 +120,40 @@
             width: 100%; height: 100%; border-radius: 50%; 
             object-fit: cover; object-position: center 15%; 
             border: 4px solid var(--brand-bg); box-sizing: border-box;
+        }
+
+        /* 品牌故事板块 */
+        .about-section {
+            background: var(--white); 
+            padding: 45px 50px; 
+            border-radius: 20px;
+            margin: 20px 10% 20px;
+            border: 1px solid rgba(109, 76, 65, 0.1); 
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            text-align: center;
+        }
+        .about-title {
+            font-size: 2rem; color: var(--brand-brown); margin-bottom: 20px;
+            font-weight: 300; letter-spacing: 1px;
+        }
+        .about-content {
+            font-size: 1.15rem; color: var(--brand-brown); max-width: 850px;
+            margin: 0 auto; text-align: justify; line-height: 1.8;
+        }
+
+        /* 新增：关于我（个人简历背书）板块样式 */
+        .bio-section {
+            padding: 40px 10% 20px;
+            text-align: center;
+        }
+        .bio-title {
+            font-size: 2rem; color: var(--brand-brown); margin-bottom: 20px;
+            font-weight: 300; letter-spacing: 1px;
+        }
+        .bio-content {
+            font-size: 1.15rem; color: var(--brand-brown); max-width: 850px;
+            margin: 0 auto; text-align: justify; line-height: 1.8;
         }
 
         .grid {
@@ -176,7 +207,8 @@
             .hero-text h1 { font-size: 3.5rem; }
             .hero-text p { margin: 0 auto; }
             .nav-right { justify-content: flex-end; }
-            .grid, .gallery-section { padding-left: 5%; padding-right: 5%; }
+            .grid, .gallery-section, .about-section, .bio-section { padding-left: 5%; padding-right: 5%; }
+            .about-section { margin-left: 5%; margin-right: 5%; padding: 35px 25px; }
         }
 
         @media (max-width: 600px) {
@@ -184,18 +216,16 @@
             .logo-area { flex: 0 0 100%; justify-content: center; }
             .logo-area img { max-height: 100px; }
             .nav-right { flex: 0 0 100%; justify-content: center; flex-direction: column; gap: 15px; }
-            
             .hero { padding: 30px 5%; }
             .hero-text h1 { font-size: 2.8rem; }
             .hero-text h2 { font-size: 1.2rem; }
             .hero-text p { font-size: 1rem; }
-            
             .profile-wrapper { flex: 0 0 200px; height: 200px; } 
-            
+            .about-title, .bio-title { font-size: 1.6rem; }
+            .about-content, .bio-content { font-size: 1rem; text-align: left; }
             .grid { grid-template-columns: 1fr; gap: 15px; } 
             .gallery-grid { grid-template-columns: 1fr; } 
             .gallery-title { font-size: 1.6rem; }
-            
             .social-links { gap: 15px; }
             .social-icon { width: 40px; height: 40px; } 
         }
@@ -243,6 +273,18 @@
     </div>
 </section>
 
+<section class="about-section">
+    <h2 class="about-title" id="about-title">About "Walk Work With Pan"</h2>
+    <div class="about-content" id="about-content">
+        </div>
+</section>
+
+<section class="bio-section">
+    <h2 class="bio-title" id="bio-title">Professional Profile</h2>
+    <div class="bio-content" id="bio-content">
+        </div>
+</section>
+
 <div class="grid" id="services">
     </div>
 
@@ -278,6 +320,11 @@ const content = {
         name: "Hongying Pan",
         title: "Cross-Cultural Specialist",
         desc: "Trilingual Project Coordinator and Cross-Cultural Specialist. Dedicated to facilitating seamless Sino-European business operations, international events, and cross-border partnerships through precise communication and on-the-ground management.",
+        aboutTitle: "The Story Behind \"Walk Work With Pan\"",
+        aboutContent: "Why \"Walk Work With Pan\"? Because impactful cross-cultural collaboration doesn't happen behind a laptop screen—it thrives on the move. Whether it’s navigating the bustling halls of an international trade fair, coordinating logistics for corporate events, or facilitating crucial communication on a factory floor from Shanghai to Europe, I believe in being on the ground, side-by-side with my clients. With a solid track record in organizing international conference programs and cross-border cultural events, I bring immense energy, professional adaptability, and sharp intuition to every project. Let’s walk the distance and do great work together.",
+        // 新增：关于我（英文版文案）
+        bioTitle: "Meet Hongying Pan",
+        bioContent: "With an extensive background in operating between China and Germany, I possess deep insights into both European and Asian professional landscapes. My experience spans managing complex program coordination and multi-stakeholder communication for international academic conferences at a leading German research institute, to overseeing large-scale educational program operations and cultural event management in Shanghai. As a cross-cultural facilitator, I look beyond literal translation to handle logistics, anticipate risks, and align strategic expectations across borders. I merge rigorous operational execution with high interpersonal agility to anchor your multinational endeavors.",
         items: [
             {t: "On-Site Interpreting", d: "Real-time consecutive interpretation (ZH/DE/EN) for trade shows, B2B negotiations, and executive meetings. Bridging cultural nuances dynamically."},
             {t: "Business Companion", d: "Full-process support: trade fairs, factory visits, and corporate hospitality."},
@@ -290,7 +337,12 @@ const content = {
     de: {
         name: "Hongying Pan",
         title: "Interkulturelle Koordinatorin",
-        desc: "Dreisprachige Projektkoordinatorin und Expertin für interkulturelles Business. Spezialisiert auf die reibungslose Umsetzung sino-europäischer Geschäftsanbahnungen, internationaler Events und grenzüberschreitender Partnerschaften.",
+        desc: "Dreisprachige Projektkoordinatorin und Expertin für interkulturelles Business. Spezialisiert auf die reibungslose Umsetzung sino-europäischer Geschäftsanbahnungen, internationaler Events und grenzüberschreitender Gesellschaften.",
+        aboutTitle: "Die Story hinter \"Walk Work With Pan\"",
+        aboutContent: "Warum \"Walk Work With Pan\"? Weil erfolgreiche interkulturelle Zusammenarbeit nicht am Schreibtisch entsteht – sondern in Bewegung. Ob beim Navigieren durch die Hallen internationaler Fachmessen, beim Eventmanagement für hochkarätige Konferenzen oder bei der direkten Abstimmung in Produktionsstätten von Shanghai bis Europa: Ich begleite meine Kunden direkt vor Ort. Durch meine Erfahrung in der Organisation von internationalen Tagungsprogrammen und Kulturprojekten bringe ich Dynamik, Flexibilität und interkulturelles Gespür in jedes Vorhaben. Lassen Sie uns gemeinsam Wege gehen und Projekte erfolgreich realisieren.",
+        // 新增：关于我（德文版文案）
+        bioTitle: "Über Mich",
+        bioContent: "Durch meine langjährige Erfahrung im Leben und Arbeiten zwischen China und Deutschland verstehe ich die Feinheiten beider Geschäftskulturen genau. Mein Werdegang umfasst die logistische Programmkoordination und Teilnehmerkommunikation für internationale wissenschaftliche Konferenzen an einem renommierten deutschen Forschungsinstitut sowie die Leitung umfassender Bildungsprogramme und Kulturevents in Shanghai. Als bilinguale Schnittstelle übersetze ich nicht nur Worte, sondern steuere komplexe Abläufe und harmonisiere grenzüberschreitende Erwartungen. Ich verbinde organisatorische Präzision mit ausgeprägter interkultureller Empathie, um den nachhaltigen Erfolg Ihrer globalen Partnerschaften zu sichern.",
         items: [
             {t: "Messe- & Verhandlungsdolmetschen", d: "Echtzeit-Dolmetschen (ZH/DE/EN) für Fachmessen, B2B-Meetings und Konferenzen. Kulturell nuancierte Kommunikation vor Ort."},
             {t: "Begleitung", d: "Umfassende Betreuung bei Messen, Werksbesuchen und Geschäftsessen."},
@@ -304,6 +356,11 @@ const content = {
         name: "潘红英",
         title: "跨文化商务协调专家",
         desc: "中英德三语项目协调与跨文化商务专家。致力于通过精准的沟通与专业的实地管理，为中外企业合作、国际会务及跨境项目提供无缝衔接的落地支持。",
+        aboutTitle: "关于 \"Walk Work With Pan\" 的故事",
+        aboutContent: "为什么是 \"Walk Work With Pan\"？因为真正的跨文化连接从不在屏幕背后，而是在‘行与作’的沿途。无论是在国际展会交错的人流中对谈、在大型国际会议后台调度资源，还是在从上海到欧洲的工厂车间一线沟通，我都坚持与客户并肩同行。凭借在国际会议统筹、文化策展项目中积累的现场组织与待客经验，我将以充沛的行动力、敏锐的文化直觉与卓越的应变能力，陪伴您的每一次商业落地。步履不停，合作共赢。",
+        // 新增：关于我（中文版文案）
+        bioTitle: "关于我",
+        bioContent: "凭借在中德两国深厚的生活与工作积淀，我建立了对欧洲与亚洲商务环境的深刻洞察。我的职业履历涵盖在德国顶尖科研机构统筹国际学术会议的复杂流程与多方协作，以及在上海主导大型教育项目运营与国际文化艺术活动的落地执行。作为多语境下的跨境协调者，我的价值不仅在于精准的语言转化，更在于高效管控项目细节、前置化解跨国协同中的物流与沟通风险。我将严谨的德式执行力与敏锐的跨文化共情力紧密结合，全方位护航您的全球化拓展与商业合作。",
         items: [
             {t: "展会与商务交传", d: "专注线下高价值场景：提供中/德/英三语展会翻译、B2B高层谈判及会议交传。精准捕捉商业语境与情绪价值，促成高效合作。"},
             {t: "商务接待", d: "全流程陪同：从展会陪同、工厂参观到商务宴请，确保沟通无碍。"},
@@ -322,6 +379,11 @@ function setLang(lang) {
     document.getElementById('name').innerText = content[lang].name;
     document.getElementById('title').innerText = content[lang].title;
     document.getElementById('desc').innerText = content[lang].desc;
+    document.getElementById('about-title').innerText = content[lang].aboutTitle;
+    document.getElementById('about-content').innerText = content[lang].aboutContent;
+    // 更新：动态切换关于我板块内容
+    document.getElementById('bio-title').innerText = content[lang].bioTitle;
+    document.getElementById('bio-content').innerText = content[lang].bioContent;
     document.getElementById('gallery-title').innerText = content[lang].galleryTitle;
     document.getElementById('footer-info').innerText = content[lang].footerText;
     document.documentElement.lang = lang; 
